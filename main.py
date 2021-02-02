@@ -27,7 +27,7 @@ class Main:
         btn_note = Button(btn_frame, text="Notes", command=self.goto_notes, padx=20)
         btn_note.grid(row=1, column=1, padx=10)
 
-        btn_read = Button(btn_frame, text="Read in Full", command=self.goto_notes, padx=20)
+        btn_read = Button(btn_frame, text="Read in Full", command=self.goto_read_full, padx=20)
         btn_read.grid(row=1, column=2, padx=10)
 
         btn_exam = Button(btn_frame, text="Exam Scramble", command=self.goto_notes, padx=20)
@@ -43,6 +43,10 @@ class Main:
         self.main_window.destroy()
         note = Notes(self.allnotes)
 
+    def goto_read_full(self):
+        from pages.read_full import Readfull
+        self.main_window.destroy()
+        readfull = Readfull(self.allnotes)
 
 if __name__ == '__main__':
     # run main

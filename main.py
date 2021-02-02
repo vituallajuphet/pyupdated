@@ -30,7 +30,7 @@ class Main:
         btn_read = Button(btn_frame, text="Read in Full", command=self.goto_read_full, padx=20)
         btn_read.grid(row=1, column=2, padx=10)
 
-        btn_exam = Button(btn_frame, text="Exam Scramble", command=self.goto_notes, padx=20)
+        btn_exam = Button(btn_frame, text="Exam Scramble", command=self.goto_shuffle, padx=20)
         btn_exam.grid(row=1, column=3, padx=10)
         btn_exam.config(width=13, font=17)
         
@@ -47,6 +47,11 @@ class Main:
         from pages.read_full import Readfull
         self.main_window.destroy()
         readfull = Readfull(self.allnotes)
+        
+    def goto_shuffle(self):
+        from pages.shuffle import Shuffle
+        self.main_window.destroy()
+        shuffle = Shuffle(self.allnotes)
 
 if __name__ == '__main__':
     # run main

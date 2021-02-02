@@ -15,7 +15,7 @@ class Readfull:
         this = self.main_window
         frame = Frame(self.main_window, width=600, height=50)
         frame.pack()
-        self.frame_note = Frame(self.main_window, width=600, height=600)
+        self.frame_note = Frame(self.main_window, width=600, height=1000)
         self.frame_note.pack()
 
         label = Label(frame, text="Read in full")

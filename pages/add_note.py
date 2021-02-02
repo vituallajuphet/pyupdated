@@ -64,6 +64,8 @@ class Addnote:
         }
         self.allnotes.append(data)
         messagebox.showinfo("Success", "Saved Successfully!")
+        self.text_title.delete(1.0,"end")
+        self.text_desc.delete(1.0,"end")
         
 
 

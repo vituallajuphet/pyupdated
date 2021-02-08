@@ -2,6 +2,8 @@ from tkinter import *
 import tkinter as tk
 from tkinter import messagebox
 from time import sleep
+from tkinter import ttk
+
 
 class Notes:
 
@@ -10,12 +12,10 @@ class Notes:
         self.all_notes = notes
 
         self.main_window = Tk(className=' Notes')
-        self.main_window.geometry("600x600")
+        self.main_window.geometry("600x800")
         this = self.main_window
-        frame = Frame(self.main_window, width=600, height=130)
-        frame.pack(fill="both", expand=True)
-        self.frame_note = Frame(self.main_window, width=600, height=600)
-        self.frame_note.pack()
+        frame = Frame(self.main_window, height=200)
+        frame.pack(side=TOP, fill=BOTH, expand=0)
 
         label = Label(frame, text="Notes Page")
         label.config(font=("Courier", 20))
@@ -29,9 +29,29 @@ class Notes:
         btnback.config(width=13, font=17)
 
         # frame notes
-        label2 = Label(self.frame_note, text="Your Notes:")
-        label2.config(font=("Courier", 18, 'bold'))
-        label2.place(x=20, y=10)
+       
+        label3 = Label(frame, text="Your Notes:")
+        label3.place(x=20, y=160)
+        label3.config(font=("Courier", 18, 'bold'))
+
+
+        canFrame = Frame(self.main_window)
+        canFrame.pack(fill=BOTH, expand=1)
+        # canFrame.place(x=0, y=200)
+
+        my_canvas = Canvas(canFrame)
+        my_canvas.pack(side=LEFT, fill=BOTH, expand=1)
+
+        my_scrollbar = ttk.Scrollbar(canFrame, orient=VERTICAL, command=my_canvas.yview)
+        my_scrollbar.pack(side=RIGHT, fill=Y)
+
+        my_canvas.configure(yscrollcommand=my_scrollbar.set)
+        my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion = my_canvas.bbox("all")))
+
+        self.lastframe = Frame(my_canvas)
+        my_canvas.create_window((0,0), window=self.lastframe, anchor="nw")
+
+         
 
         self.generate_notes()
         self.main_window.mainloop()
@@ -41,9 +61,13 @@ class Notes:
         base_y = 70
         i = 0
         btn=[]
+
+       
+
         for note in self.all_notes:
-            btn.append(Button(self.frame_note, text="View Note", width=13, font=17, padx=20))
-            btn[i].place(x=20, y=base_y)
+            btn.append(Button(self.lastframe, text="View Note", width=13, font=17, padx=20))
+            # btn[i].place(x=20, y=base_y)
+            btn[i].grid(row=i, column=0, pady=10, padx=10)
             btn[i]["command"] = lambda i=note: self.view_note(i)
             base_y += 40
             i += 1
